@@ -12,8 +12,10 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "@tailwindcss/vite": "^4.1.8",
+    "@types/axios": "^0.14.4",
     "antd": "^5.25.3",
     "autoprefixer": "^10.4.21",
+    "axios": "^1.9.0",
     "path": "^0.12.7",
     "postcss": "^8.5.4",
     "react": "^19.1.0",

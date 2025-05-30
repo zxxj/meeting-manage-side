@@ -1,7 +1,12 @@
-html, body {
-  padding: 0;
-  margin: 0;
-  background: #fff;
+body {
+  background-color: #fff;
+  color: #fff;
 }
 
-@import "tailwindcss"
+.ant-menu-dark .ant-menu-item-selected {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+@import "tailwindcss";
+

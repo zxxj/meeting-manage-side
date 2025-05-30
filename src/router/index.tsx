@@ -1,6 +1,7 @@
 import LayoutComponents from '@/layout/index';
 import Login from '@/pages/login/index';
 import { createBrowserRouter } from 'react-router-dom';
+import Error404 from '@/pages/404/index';
 
 const routes = [
   {
@@ -8,10 +9,14 @@ const routes = [
     element: <LayoutComponents />,
     children: [
       {
-        path: 'login',
-        element: <Login />,
+        path: '*',
+        element: <Error404 />,
       },
     ],
+  },
+  {
+    path: 'login',
+    element: <Login />,
   },
 ];
 
