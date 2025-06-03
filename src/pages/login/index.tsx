@@ -16,7 +16,9 @@ const Login: React.FC = () => {
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
       const { code, data } = await login(values);
-      if (code !== 200 && code !== 201) await messageApi.warning(data);
+      if (code !== 200 && code !== 201) {
+        return await messageApi.warning(data);
+      }
 
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);

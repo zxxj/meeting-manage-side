@@ -4,14 +4,17 @@ import type React from 'react';
 import { useState } from 'react';
 import ChangeUserInfoModal from './change-userinfo-modal';
 import ChangePasswordModal from './change-password-modal';
+import LogoutModal from './logout';
 
 const HandleSelect: React.FC = () => {
   const [isShowUserInfoModal, setIsShowUserInfoModal] = useState(false);
   const [isShowPasswordMidal, setIsShowPasswordMidal] = useState(false);
+  const [isShowLogoutModal, setIsShowLogoutModal] = useState(false);
 
   const onClose = () => {
     setIsShowUserInfoModal(false);
     setIsShowPasswordMidal(false);
+    setIsShowLogoutModal(false);
   };
 
   const items: MenuProps['items'] = [
@@ -34,6 +37,7 @@ const HandleSelect: React.FC = () => {
   const onOpenChange: MenuProps['onClick'] = ({ key }) => {
     if (key === '1') setIsShowUserInfoModal(true);
     if (key === '2') setIsShowPasswordMidal(true);
+    if (key === '3') setIsShowLogoutModal(true);
   };
 
   return (
@@ -47,6 +51,7 @@ const HandleSelect: React.FC = () => {
 
       <ChangeUserInfoModal visible={isShowUserInfoModal} onClose={onClose} />
       <ChangePasswordModal visible={isShowPasswordMidal} onClose={onClose} />
+      <LogoutModal visible={isShowLogoutModal} onClose={onClose} />
     </>
   );
 };
