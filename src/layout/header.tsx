@@ -1,4 +1,5 @@
 import { Layout } from 'antd';
+import HandleSDropdown from './components/handle-dropdown';
 
 const { Header } = Layout;
 
@@ -12,7 +13,14 @@ const HeaderComponents = () => {
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
       }}
-    ></Header>
+    >
+      <div className="flex justify-between pl-8 pr-8">
+        <div>标题</div>
+        <div>
+          <HandleSDropdown />
+        </div>
+      </div>
+    </Header>
   );
 };
 

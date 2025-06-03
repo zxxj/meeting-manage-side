@@ -8,7 +8,13 @@ const ContentComponents = () => {
     token: { borderRadiusLG },
   } = theme.useToken();
   return (
-    <Content style={{ margin: '24px 16px 0' }}>
+    <Content
+      style={{
+        margin: '24px 16px 0',
+        overflowY: 'hidden',
+        height: 'calc(100vh - 130px)',
+      }}
+    >
       <div
         style={{
           padding: 24,

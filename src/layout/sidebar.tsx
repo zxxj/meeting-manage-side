@@ -1,23 +1,23 @@
 import { Layout, Menu } from 'antd';
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const { Sider } = Layout;
 const SideBarComponents = () => {
+  const navigate = useNavigate();
+
   const items = [
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-    UserOutlined,
-  ].map((icon, index) => ({
-    key: String(index + 1),
-    icon: React.createElement(icon),
-    label: `nav ${index + 1}`,
-  }));
+    {
+      key: 'user',
+      icon: React.createElement(UserOutlined),
+      label: '用户管理',
+    },
+  ];
+
+  const handleClick = (item: any) => {
+    navigate(`/${item.key}`);
+  };
 
   return (
     <Sider
@@ -43,6 +43,7 @@ const SideBarComponents = () => {
           color: '#fff',
           borderRight: 'none',
         }}
+        onClick={handleClick}
       />
     </Sider>
   );

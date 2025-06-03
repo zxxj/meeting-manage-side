@@ -16,8 +16,12 @@ const Login: React.FC = () => {
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
       const { code, data } = await login(values);
-      if (code !== 200 && code !== 201) messageApi.warning(data);
+      if (code !== 200 && code !== 201) await messageApi.warning(data);
 
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
+      localStorage.setItem('user_info', JSON.stringify(data.userInfo));
+      await messageApi.success('登录成功!');
       navigate('/');
     } catch (error) {
       console.log(error);
@@ -31,7 +35,10 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div
+      className="w-screen h-screen flex justify-center items-center"
+      style={{ backgroundColor: '#141414' }}
+    >
       {contextHolder} {/* ✅ 记得加 */}
       <Card className="w-1/5">
         <Form
