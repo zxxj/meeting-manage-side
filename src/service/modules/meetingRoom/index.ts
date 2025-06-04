@@ -4,6 +4,13 @@ import type {
   MeetingRoomListVo,
   CreateMeetingRoomDto,
 } from '@types/meetingRoom';
+import type {
+  CreateMeetingRoomVo,
+  DeleteMeetingRoomVo,
+  FindMeetingRoomById,
+  UpdateMeetingRoomDto,
+  UpdateMeetingRoomVo,
+} from '../../../types/meetingRoom';
 
 const PATH = 'meeting-room';
 
@@ -15,6 +22,24 @@ export const list = async (
   });
 };
 
-export const create = async (dto: CreateMeetingRoomDto) => {
+export const create = async (
+  dto: CreateMeetingRoomDto,
+): Promise<CreateMeetingRoomVo> => {
   return await http.post(`${PATH}/create`, dto);
+};
+
+export const findRoomById = async (
+  id: number,
+): Promise<FindMeetingRoomById> => {
+  return await http.get(`${PATH}/${id}`);
+};
+
+export const update = async (
+  dto: UpdateMeetingRoomDto,
+): Promise<UpdateMeetingRoomVo> => {
+  return await http.post(`${PATH}/update`, dto);
+};
+
+export const remove = async (id: number): Promise<DeleteMeetingRoomVo> => {
+  return await http.delete(`${PATH}/${id}`);
 };

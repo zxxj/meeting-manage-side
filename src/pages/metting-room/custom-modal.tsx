@@ -1,14 +1,19 @@
 import { Form, Modal, type FormProps, Input, Button, message } from 'antd';
 import type React from 'react';
 import { create } from '@/service/modules/meetingRoom';
+import { useEffect } from 'react';
+import { findRoomById, update } from '../../service/modules/meetingRoom';
 
 interface CustomModalProps {
   visible: boolean;
+  isAdd: boolean;
+  roomId: number;
   onClose: () => void;
   onAddSuccess: () => void;
 }
 
 interface FieldType {
+  id?: number;
   name: string;
   capacity: number;
   location: string;
@@ -18,6 +23,8 @@ interface FieldType {
 
 const CustomModal: React.FC<CustomModalProps> = ({
   visible,
+  isAdd,
+  roomId,
   onClose,
   onAddSuccess,
 }) => {
@@ -25,18 +32,35 @@ const CustomModal: React.FC<CustomModalProps> = ({
   const [form] = Form.useForm();
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    try {
-      const { code, data } = await create(values);
+    if (isAdd) {
+      try {
+        const { code, data } = await create(values);
 
-      if (code === 200 || code === 201) {
-        messageApi.success(data);
-        onAddSuccess();
-        onClose();
-      } else {
-        messageApi.warning(data);
+        if (code === 200 || code === 201) {
+          messageApi.success(data);
+          onAddSuccess();
+          onClose();
+        } else {
+          messageApi.warning(data);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      try {
+        values.id = roomId as number;
+        const { code, data } = await update(values);
+
+        if (code === 200 || code === 201) {
+          messageApi.success(data);
+          onAddSuccess();
+          onClose();
+        } else {
+          messageApi.warning(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -45,6 +69,23 @@ const CustomModal: React.FC<CustomModalProps> = ({
   ) => {
     console.log('Failed:', errorInfo);
   };
+
+  const findById = async () => {
+    try {
+      const { data } = await findRoomById(roomId);
+      form.setFieldsValue({ ...data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    form.resetFields();
+    if (!isAdd) {
+      console.log(roomId);
+      findById();
+    }
+  }, [isAdd, visible]);
 
   return (
     <>

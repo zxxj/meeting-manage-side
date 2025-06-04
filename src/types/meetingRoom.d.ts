@@ -39,3 +39,41 @@ export interface CreateMeetingRoomDto {
   equipment: string;
   description: string;
 }
+
+// 创建会议室vo
+export interface CreateMeetingRoomVo {
+  code: number;
+  data: string;
+  message: string;
+}
+
+// 查询会议室vo
+export interface FindMeetingRoomById {
+  code: number;
+  data: MeetingRooms;
+  message: string;
+}
+
+// 更新会议室dto
+export interface UpdateMeetingRoomDto {
+  id: number;
+  name: string;
+  capacity: number;
+  location: string;
+  equipment: string;
+  description: string;
+}
+
+// 更新会议室vo
+export interface UpdateMeetingRoomVo {
+  code: number;
+  data: string;
+  message: string;
+}
+
+// 删除会议室vo
+export interface DeleteMeetingRoomVo {
+  code: number;
+  data: string;
+  message: string;
+}

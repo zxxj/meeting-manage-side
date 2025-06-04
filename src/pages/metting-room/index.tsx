@@ -1,7 +1,7 @@
 import type React from 'react';
 import { Button, Form, Input, Card, Table, message } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
-import { list } from '../../service/modules/meetingRoom';
+import { list, remove } from '../../service/modules/meetingRoom';
 import type { UserInfo } from '../../types/user';
 import CustomModal from './custom-modal';
 
@@ -15,6 +15,7 @@ const MeetingRoom: React.FC = () => {
   const [total, setTotal] = useState(0);
   const [isShowCustomModal, setCustomModal] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
+  const [roomId, setRoomId] = useState();
 
   const onClose = () => {
     setCustomModal(false);
@@ -66,10 +67,10 @@ const MeetingRoom: React.FC = () => {
       render: (record: UserInfo) => {
         return (
           <div>
-            <Button type="link" onClick={() => showModal(false)}>
+            <Button type="link" onClick={() => showModal(false, record.id)}>
               编辑
             </Button>
-            <Button type="link" danger>
+            <Button type="link" danger onClick={() => onDelete(record.id)}>
               删除
             </Button>
           </div>
@@ -105,11 +106,28 @@ const MeetingRoom: React.FC = () => {
     setPageSize(pageSize);
   }, []);
 
-  const showModal = (type: boolean) => {
-    console.log(type);
+  const showModal = (type: boolean, roomId: any) => {
+    if (!type) {
+      setRoomId(roomId);
+    }
+
     setIsAdd(type);
-    console.log(isAdd);
     setCustomModal(true);
+  };
+
+  const onDelete = async (id: number) => {
+    try {
+      const { code, data } = await remove(id);
+      if (code === 200 || code === 201) {
+        messageApi.success(data);
+      } else {
+        messageApi.warning(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    getMeetingRoomList();
   };
 
   useEffect(() => {
@@ -156,7 +174,7 @@ const MeetingRoom: React.FC = () => {
 
       <Card style={{ marginTop: '30px' }}>
         <div className="mb-4 flex justify-end">
-          <Button type="primary" onClick={() => showModal(true)}>
+          <Button type="primary" onClick={() => showModal(true, null)}>
             新增会议室
           </Button>
         </div>
@@ -178,6 +196,8 @@ const MeetingRoom: React.FC = () => {
         visible={isShowCustomModal}
         onClose={onClose}
         onAddSuccess={getMeetingRoomList}
+        isAdd={isAdd}
+        roomId={roomId}
       />
     </>
   );
