@@ -5,7 +5,7 @@ import {
   Input,
   Modal,
   type FormProps,
-  Image,
+  // Image,
   message,
 } from 'antd';
 import {
@@ -85,6 +85,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
     <>
       {contextHolder}
       <Modal
+        destroyOnHidden
         title="修改密码"
         closable={{ 'aria-label': 'Custom Close Button' }}
         open={visible}
@@ -92,7 +93,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
         onCancel={onClose}
         footer={[
           <>
-            <Button>关闭</Button>
+            <Button onClick={onClose}>关闭</Button>
             <Button
               key="submit"
               type="primary"
@@ -111,7 +112,6 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 16 }}
           style={{ maxWidth: 600 }}
-          initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"

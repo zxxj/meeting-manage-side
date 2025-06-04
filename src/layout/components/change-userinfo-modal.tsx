@@ -79,6 +79,7 @@ const ChangeUserInfoModal: React.FC<ChangeUserInfoModalProps> = ({
     <>
       {contextHolder}
       <Modal
+        destroyOnHidden
         title="修改用户信息"
         closable={{ 'aria-label': 'Custom Close Button' }}
         open={visible}

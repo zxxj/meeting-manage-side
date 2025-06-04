@@ -19,6 +19,7 @@ const LogoutModal: React.FC<LogoutModalProps> = ({ visible, onClose }) => {
   return (
     <>
       <Modal
+        destroyOnHidden
         title="注销"
         closable={{ 'aria-label': 'Custom Close Button' }}
         open={visible}

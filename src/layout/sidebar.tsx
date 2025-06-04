@@ -1,5 +1,5 @@
 import { Layout, Menu } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, DesktopOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +12,11 @@ const SideBarComponents = () => {
       key: 'user',
       icon: React.createElement(UserOutlined),
       label: '用户管理',
+    },
+    {
+      key: 'meetingRoom',
+      icon: React.createElement(DesktopOutlined),
+      label: '会议室管理',
     },
   ];
 

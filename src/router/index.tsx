@@ -3,6 +3,7 @@ import Login from '@/pages/login/index';
 import { createBrowserRouter } from 'react-router-dom';
 import Error404 from '@/pages/404/index';
 import User from '@/pages/user/index';
+import MeetingRoom from '../pages/metting-room';
 
 const routes = [
   {
@@ -12,6 +13,10 @@ const routes = [
       {
         path: 'user',
         element: <User />,
+      },
+      {
+        path: 'meetingRoom',
+        element: <MeetingRoom />,
       },
       {
         path: '*',
